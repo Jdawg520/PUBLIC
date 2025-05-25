@@ -106,7 +106,10 @@ AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2
 PasswordAuthentication no
 PermitRootLogin no" >> /etc/ssh/sshd_config.d/my_config.conf
 sudo mkdir .ssh
-sudo echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPUFca2hcZWvtUCkQ5+krz9KcjurPuwuX5/VG8i+2bxJ Mint-Machine" >> ~.ssh/authorized_keys
+echo ""
+echo "Enter Public SSH Key..."
+read -p 'PUBLIC SSH KEY:  ' sshkey
+sudo echo "$sshkey" >> ~.ssh/authorized_keys
 sudo systemctl restart sshd
 # SYSTEM REBOOT
 
