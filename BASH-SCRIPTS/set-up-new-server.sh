@@ -107,8 +107,8 @@ echo ""
 echo ""
 echo "SYSTEM REBOOT REQUIRED!!!"
 while true; do
-    read -p "Reboot Now? [Y=yes, N=no]" yesno
-    case $yesno in
+    read -p "Reboot Now? [Y=yes, N=no]" yesno2
+    case $yesno2 in
         [Yy]* )
             sudo reboot now            
             break
