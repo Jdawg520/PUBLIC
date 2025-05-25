@@ -85,14 +85,18 @@ sudo apt install unattended-upgrades -y
 sudo dpkg-reconfigure --priority=low unattended-upgrades
 
 ## Change 50unattended-upgrades File
+
+sudo echo 'Unattended-Upgrade::Mail "email";
+Unattended-Upgrade::MailReport "on-change";
+Unattended-Upgrade::Automatic-Reboot "true";
+' >> /etc/apt/apt.conf.d/51my-unattended-upgrades
+
 echo ""
 echo "Enter Admin email address for notifications..."
 read -p 'Admin email address:  ' admin
 
-sudo echo 'Unattended-Upgrade::Mail "$admin";
-Unattended-Upgrade::MailReport "on-change";
-Unattended-Upgrade::Automatic-Reboot "true";
-' >> /etc/apt/apt.conf.d/51my-unattended-upgrades
+sudo sep >> /etc/apt/apt.conf.d/51my-unattended-upgrades
+
 
 sudo unattended-upgrades -d
 
