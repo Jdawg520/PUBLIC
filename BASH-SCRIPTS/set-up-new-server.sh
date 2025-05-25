@@ -102,5 +102,21 @@ sudo unattended-upgrades -d
 # setup SSH
 echo ""
 echo ""
-echo "REBOOT REQUIRED SYSTEM WILL NOW REBOOT!!!"
-sudo reboot now
+echo "SYSTEM REBOOT REQUIRED!!!"
+while true; do
+    read -p "Reboot Now? [Y= yes, N= no]" yesno
+    case $yesno in
+        [Yy]* )
+            sudo reboot now            
+            break
+
+        ;;
+        [Nn]* )
+            break
+
+        ;;
+        * )
+            echo ""
+            echo "Select either Y or N";;
+    esac
+done
