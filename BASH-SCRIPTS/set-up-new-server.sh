@@ -100,3 +100,7 @@ sudo unattended-upgrades -d
 
 
 # setup SSH
+echo ""
+echo ""
+echo "REBOOT REQUIRED SYSTEM WILL NOW REBOOT!!!"
+sudo reboot now
