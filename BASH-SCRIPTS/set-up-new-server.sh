@@ -101,8 +101,12 @@ sudo unattended-upgrades -d
 
 # setup SSH
 
-sudo mkdir ssh
-sudo echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPUFca2hcZWvtUCkQ5+krz9KcjurPuwuX5/VG8i+2bxJ Mint-Machine" >> ~ssh/.authorized_keys
+sudo echo "PubkeyAuthentication yes
+AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2
+PasswordAuthentication no
+PermitRootLogin no" >> /etc/ssh/sshd_config.d/my_config.conf
+sudo mkdir .ssh
+sudo echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPUFca2hcZWvtUCkQ5+krz9KcjurPuwuX5/VG8i+2bxJ Mint-Machine" >> ~.ssh/authorized_keys
 
 # SYSTEM REBOOT
 
