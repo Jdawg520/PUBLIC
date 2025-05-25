@@ -8,7 +8,7 @@ sudo apt update && sudo apt upgrade -y
 
 while true; do
     echo ""
-    read -p "Set Hostname? [Y= yes, N= no]" yesno
+    read -p "Set Hostname? [Y=yes, N=no]" yesno
     case $yesno in
         [Yy]* )
             echo ""
@@ -107,7 +107,7 @@ echo ""
 echo ""
 echo "SYSTEM REBOOT REQUIRED!!!"
 while true; do
-    read -p "Reboot Now? [Y= yes, N= no]" yesno
+    read -p "Reboot Now? [Y=yes, N=no]" yesno
     case $yesno in
         [Yy]* )
             sudo reboot now            
