@@ -95,7 +95,7 @@ echo ""
 echo "Enter Admin email address for notifications..."
 read -p 'Admin email address:  ' admin
 
-sudo sep >> /etc/apt/apt.conf.d/51my-unattended-upgrades
+sudo sed -i 's/email =/$admin =/g' /etc/apt/apt.conf.d/51my-unattended-upgrades
 
 
 sudo unattended-upgrades -d
