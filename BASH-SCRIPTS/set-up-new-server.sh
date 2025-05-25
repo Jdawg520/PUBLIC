@@ -101,6 +101,9 @@ sudo unattended-upgrades -d
 
 # setup SSH
 
+sudo mkdir ssh
+sudo echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPUFca2hcZWvtUCkQ5+krz9KcjurPuwuX5/VG8i+2bxJ Mint-Machine" >> ~ssh/.authorized_keys
+
 # SYSTEM REBOOT
 
 echo ""
