@@ -47,7 +47,7 @@ echo ""
 echo ""
 echo ""
 neofetch
-echo ""' > /etc/profile.d/fig_neo.sh
+echo ""' | sudo tee -a /etc/profile.d/fig_neo.sh
 
 echo ""
 echo "ENTER SERVER NAME"
