@@ -29,6 +29,31 @@ while true; do
             echo "Select either Y or N";;
     esac
 done
+# Install Neofetch and Figurine
+
+sudo apt install neofetch
+sudo mkdir tmp
+cd tmp
+sudo wget https://github.com/arsham/figurine/releases/download/v1.3.0/figurine_linux_amd64_v1.3.0.tar.gz
+sudo tar xvf figurine_linux_amd64_v1.3.0.tar.gz
+sudo mv deploy/figurine /usr/local/bin/
+cd ..
+sudo rm -r tmp
+
+sudo echo '#!/bin/bash
+
+echo ""
+/usr/local/bin/figurine -f "3d.flf" neoname
+echo ""
+echo ""
+neofetch
+echo ""' > /etc/profile.d/fig_neo.sh
+
+echo ""
+echo "ENTER SERVER NAME"
+read -p 'Server Name:  ' neoname
+
+sudo sed -i "s/neoname =/$neoname =/g" /etc/profile.d/fig_neo.sh
 
 # Install Postfix
 
@@ -89,13 +114,13 @@ sudo dpkg-reconfigure --priority=low unattended-upgrades
 sudo echo 'Unattended-Upgrade::Mail "email";
 Unattended-Upgrade::MailReport "on-change";
 Unattended-Upgrade::Automatic-Reboot "true";
-' >> /etc/apt/apt.conf.d/51my-unattended-upgrades
+' > /etc/apt/apt.conf.d/51my-unattended-upgrades
 
 echo ""
 echo "Enter Admin email address for notifications..."
 read -p 'Admin email address:  ' admin
 
-sudo sed -i 's/email =/$admin =/g' /etc/apt/apt.conf.d/51my-unattended-upgrades
+sudo sed -i "s/email =/$admin =/g" /etc/apt/apt.conf.d/51my-unattended-upgrades
 
 
 sudo unattended-upgrades -d
@@ -108,7 +133,7 @@ sudo unattended-upgrades -d
 sudo echo "PubkeyAuthentication yes
 AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2
 PasswordAuthentication yes
-PermitRootLogin no" >> /etc/ssh/sshd_config.d/my_config.conf
+PermitRootLogin no" > /etc/ssh/sshd_config.d/my_config.conf
 sudo mkdir .ssh
 echo ""
 echo "Enter Public SSH Key..."
