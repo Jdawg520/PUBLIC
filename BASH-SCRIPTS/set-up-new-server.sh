@@ -31,7 +31,7 @@ while true; do
 done
 # Install Neofetch and Figurine
 
-sudo apt install neofetch
+sudo apt install neofetch -y
 sudo mkdir tmp
 cd tmp
 sudo wget https://github.com/arsham/figurine/releases/download/v1.3.0/figurine_linux_amd64_v1.3.0.tar.gz
