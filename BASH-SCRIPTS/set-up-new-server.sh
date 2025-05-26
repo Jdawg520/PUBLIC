@@ -43,7 +43,7 @@ sudo rm -r tmp
 sudo echo '#!/bin/bash
 
 echo ""
-/usr/local/bin/figurine -f "3d.flf" neoname
+/usr/local/bin/figurine -f "3d.flf" name1
 echo ""
 echo ""
 neofetch
@@ -53,7 +53,7 @@ echo ""
 echo "ENTER SERVER NAME"
 read -p 'Server Name:  ' neoname
 
-sudo sed -i 's/neoname =/$neoname =/g' /etc/profile.d/fig_neo.sh
+sudo sed -i 's/name1 =/$neoname =/g' /etc/profile.d/fig_neo.sh
 
 # Install Postfix
 
