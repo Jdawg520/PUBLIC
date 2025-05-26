@@ -53,7 +53,7 @@ echo ""
 echo "ENTER SERVER NAME"
 read -p 'Server Name:  ' neoname
 
-sudo sed -i "s/neoname =/$neoname =/g" /etc/profile.d/fig_neo.sh
+sudo sed -i 's/neoname =/$neoname =/g' /etc/profile.d/fig_neo.sh
 
 # Install Postfix
 
