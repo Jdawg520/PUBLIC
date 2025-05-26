@@ -115,6 +115,7 @@ echo "Enter Public SSH Key..."
 read -p 'PUBLIC SSH KEY:  ' sshkey
 sudo echo "$sshkey" >> ~/.ssh/authorized_keys
 sudo systemctl restart sshd
+
 # SYSTEM REBOOT
 
 echo ""
