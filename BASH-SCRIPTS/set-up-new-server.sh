@@ -84,7 +84,7 @@ sudo echo "This is a test message from a new Linux server installation" | mail -
 sudo apt install unattended-upgrades -y
 sudo dpkg-reconfigure --priority=low unattended-upgrades
 
-## Change 50unattended-upgrades File
+# Change unattended-upgrades config File
 
 sudo echo 'Unattended-Upgrade::Mail "email";
 Unattended-Upgrade::MailReport "on-change";
