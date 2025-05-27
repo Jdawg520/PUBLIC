@@ -131,10 +131,10 @@ sudo unattended-upgrades -d
 
 # setup SSH
 
-sudo echo "PubkeyAuthentication yes
+sudo sh -c "echo 'PubkeyAuthentication yes
 AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2
-PasswordAuthentication yes
-PermitRootLogin no" > /etc/ssh/sshd_config.d/my_config.conf
+PasswordAuthentication no
+PermitRootLogin no' > /etc/ssh/sshd_config.d/my_config.conf"
 
 sudo mkdir .ssh
 
