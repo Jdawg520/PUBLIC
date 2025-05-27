@@ -29,6 +29,7 @@ while true; do
             echo "Select either Y or N";;
     esac
 done
+
 # Install Neofetch and Figurine
 
 sudo apt install neofetch -y
@@ -62,16 +63,17 @@ sudo apt install -y libsasl2-modules mailutils
 sudo apt install -y postfix postfix-pcre
 
 # Input for SMTP account
+
 echo ""
 echo "Enter SMTP Server Password..."
 read -sp 'Password:  ' PWORD
 
-sudo echo "smtp.gmail.com cyoppsalerts@gmail.com:$PWORD" > /etc/postfix/sasl_passwd
+sudo sh -c "echo 'smtp.gmail.com cyoppsalerts@gmail.com:$PWORD' > /etc/postfix/sasl_passwd"
 
 sudo postmap hash:/etc/postfix/sasl_passwd
 sudo chmod 600 /etc/postfix/sasl_passwd
 
-sudo sed -i 's/relayhost/#relayhost/g' /etc/postfix/main.cf 
+sudo sh -c "sed -i 's/relayhost/#relayhost/g' /etc/postfix/main.cf" 
 
 sudo echo "# google mail configuration
 
