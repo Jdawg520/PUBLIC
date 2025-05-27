@@ -53,6 +53,19 @@ while true; do
     esac
 done
 
+if [ "$EUID" -eq 0 ]; then
+    echo -e "${RED} This script is running as the root user!"
+    echo -e " Root privileges are required for the script to function properly${NC}"
+    read -p "Select any key to continue: " choice
+
+    # Check the user's choice
+    case "$choice" in
+        *)
+            echo -e "Continuing...."
+            ;;    
+    esac
+fi
+
 # Update repositories
 
 sudo apt update && sudo apt upgrade -y
