@@ -104,8 +104,8 @@ echo ""
 echo "The server will now send a test email message. please enter the recipient email address."
 
 read -p 'Recipient email address:  ' email
+echo "This is a test message from a new Linux server installation" | mail -s "Test Email From New Debian Server" $email
 
-sudo echo "'This is a test message from a new Linux server installation' | mail -s 'Test Email From New Debian Server' $email"
 
 # setup unattended Upgrades
 
