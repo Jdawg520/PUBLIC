@@ -47,7 +47,7 @@ echo ""
 echo ""
 echo ""
 neofetch
-echo ""' fig_neo.sh
+echo ""' > fig_neo.sh
 
 echo ""
 echo "ENTER SERVER NAME"
