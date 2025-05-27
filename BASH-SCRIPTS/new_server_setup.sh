@@ -53,18 +53,22 @@ while true; do
     esac
 done
 
-if [ "$EUID" -eq 0 ]; then
-    echo -e "${RED} This script is running as the root user!"
-    echo -e " Root privileges are required for the script to function properly${NC}"
-    read -p "Select any key to continue: " choice
+if ! [ "$EUID" -eq 0 ]; then
+    echo -e "${RED}WARNING: This script is not running as the root user!"
+    echo -e "This script requires root user privileges in order to function properly.${NC}"
+    read -p "Do you still want to continue? (y/n): " choice
 
     # Check the user's choice
     case "$choice" in
-        *)
+        [Yy]|[Yy][Ee][Ss])
             echo -e "Continuing...."
-            ;;    
+            ;;
+        *)
+            exit 1
+            ;;
     esac
 fi
+
 
 # Update repositories
 
