@@ -71,7 +71,7 @@ sudo echo "smtp.gmail.com cyoppsalerts@gmail.com:$PWORD" > /etc/postfix/sasl_pas
 sudo postmap hash:/etc/postfix/sasl_passwd
 sudo chmod 600 /etc/postfix/sasl_passwd
 
-sudo sed -i 's/relayhost =/#relayhost =/g' /etc/postfix/main.cf 
+sudo sed -i 's/relayhost/#relayhost/g' /etc/postfix/main.cf 
 
 sudo echo "# google mail configuration
 
@@ -103,7 +103,7 @@ echo "The server will now send a test email message. please enter the recipient 
 
 read -p 'Recipient email address:  ' email
 
-sudo echo "This is a test message from a new Linux server installation" | mail -s "Test Email From New Debian Server" $email
+sudo echo "'This is a test message from a new Linux server installation' | mail -s 'Test Email From New Debian Server' $email"
 
 # setup unattended Upgrades
 
@@ -121,7 +121,7 @@ echo ""
 echo "Enter Admin email address for notifications..."
 read -p 'Admin email address:  ' admin
 
-sudo sed -i "s/email =/$admin =/g" /etc/apt/apt.conf.d/51my-unattended-upgrades
+sudo sed -i "s/email/$admin/g" /etc/apt/apt.conf.d/51my-unattended-upgrades
 
 
 sudo unattended-upgrades -d
@@ -139,7 +139,7 @@ sudo mkdir .ssh
 echo ""
 echo "Enter Public SSH Key..."
 read -p 'PUBLIC SSH KEY:  ' sshkey
-sudo echo "$sshkey" >> .ssh/authorized_keys
+sudo echo "$sshkey" > .ssh/authorized_keys
 sudo systemctl restart sshd
 
 # SYSTEM REBOOT
