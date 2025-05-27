@@ -28,6 +28,9 @@ Copyright 2025-$(date +'%Y'), Jonathan Syposs.
 
 EOF
 
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
 
 # WERE ROOT AND EXECUTABLE PRIVLEDGES ASSIGNED?
 
