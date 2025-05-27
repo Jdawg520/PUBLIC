@@ -1,5 +1,26 @@
 #!/bin/bash
 
+# WERE ROOT AND EXECUTABLE PRIVLEDGES ASSIGNED?
+
+while true; do
+    echo "!!!! THIS SCRIPT REQUIRES THAT READ/WRITE PRIVILEGES ARE ASSIGNED, AND THAT IT IS EXECUTED AS A ROOT USER !!!!"
+    echo ""
+    read -p "Was the script executed with root/read/write privileges? [Y=yes, N=no]" yesno
+    case $yesno in
+        [Yy]* )
+            break
+
+        ;;
+        [Nn]* )
+            exit
+
+        ;;
+        * )
+            echo ""
+            echo "Select either Y or N";;
+    esac
+done
+
 # Update repositories
 
 sudo apt update && sudo apt upgrade -y
