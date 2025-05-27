@@ -47,13 +47,14 @@ echo ""
 echo ""
 echo ""
 neofetch
-echo ""' | sudo tee -a /etc/profile.d/fig_neo.sh
+echo ""' fig_neo.sh
 
 echo ""
 echo "ENTER SERVER NAME"
 read -p 'Server Name:  ' neoname
 
-sudo sed -i "s/name1 =/$neoname =/g" /etc/profile.d/fig_neo.sh
+sudo sed -i "s/name1 =/$neoname =/g" fig_neo.sh
+sudo mv fig_neo.sh /etc/profile.d/fig_neo.sh
 
 # Install Postfix
 
