@@ -13,7 +13,7 @@ while true; do
         [Yy]* )
             echo ""
             read -p 'new hostname:  ' hostname
-            hostnamectl set-hostname $hostname
+            sudo hostnamectl set-hostname $hostname
             echo "NEW HOSTNAME SET!!!!"
             echo ""
             echo ""
