@@ -19,8 +19,8 @@ cat << "EOF"
 EOF
 
 cat << EOF
-This script sets up a Debian based server the way I
-like it.
+This script performs the inital set up of a Debian 
+based server the way I like it.
 
 Copyright 2025-$(date +'%Y'), Jonathan Syposs.
 
