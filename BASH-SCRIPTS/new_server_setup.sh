@@ -35,6 +35,7 @@ NC='\033[0m' # No Color
 # WERE ROOT AND EXECUTABLE PRIVLEDGES ASSIGNED?
 
 while true; do
+    echo ""
     echo "!!!! THIS SCRIPT REQUIRES THAT READ/WRITE PRIVILEGES ARE ASSIGNED, AND THAT IT IS EXECUTED AS A ROOT USER !!!!"
     echo ""
     read -p "Was the script executed with root/read/write privileges? [Y=yes, N=no]" yesno
@@ -54,6 +55,8 @@ while true; do
 done
 
 if ! [ "$EUID" -eq 0 ]; then
+    echo ""
+    echo ""
     echo -e "${RED}WARNING: This script is not running as the root user!"
     echo -e "This script requires root user privileges in order to function properly.${NC}"
     read -p "Do you still want to continue? (y/n): " choice
