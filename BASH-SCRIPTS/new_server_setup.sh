@@ -102,7 +102,7 @@ done
 
 # Install Neofetch and Figurine
 
-sudo apt install neofetch -y
+sudo apt install -y neofetch
 sudo mkdir tmp
 cd tmp
 sudo wget https://github.com/arsham/figurine/releases/download/v1.3.0/figurine_linux_amd64_v1.3.0.tar.gz
