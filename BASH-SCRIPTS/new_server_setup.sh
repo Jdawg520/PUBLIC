@@ -124,7 +124,7 @@ neofetch
 echo ""' > fig_neo.sh
 
 echo ""
-echo "ENTER SERVER NAME"
+echo "ENTER SHELL DISPLAY NAME"
 read -p 'Server Name:  ' neoname
 
 sudo sed -i "s/name1/$neoname/g" fig_neo.sh
