@@ -161,7 +161,7 @@ smtp_tls_session_cache_timeout = 3600s
 smtp_header_checks = pcre:/etc/postfix/smtp_header_checks" >> /etc/postfix/main.cf
 
 echo ""
-echo "Enter Server Name..."
+echo "Enter Email Display Name..."
 read -p 'Server Name:  ' servername
 
 sudo echo "/^From:.*/ REPLACE From: $servername-Alert <pve1-alert@something.com>" > /etc/postfix/smtp_header_checks
