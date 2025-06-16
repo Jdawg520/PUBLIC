@@ -28,29 +28,47 @@ Copyright 2025-$(date +'%Y'), Jonathan Syposs.
 
 EOF
 
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+
 # Check if script has root privileges
 
 if [[ $(whoami) != "root" ]]; then
-    echo ""
-    echo "ERROR: This script must be run as 'root' or with 'sudo' to function."
+    cat << EOF
+
+====================================================================
+ERROR: This script must be run as 'root' or with 'sudo' to function.
+====================================================================
+
+EOF
     exit 1
 fi
 
 # Check if script has read / write privileges
 
 if ! [[ $(stat -c "%A" $0) =~ "rw" ]]; then
-   echo ""
-   echo "ERROR: This script requires read / write privileges to function."
-   exit 1
+    cat << EOF
+
+================================================================
+ERROR: This script requires read / write privileges to function.
+================================================================               
+
+EOF
+    exit 1
 fi
 
 # Update repositories
 
 sudo apt update && sudo apt upgrade -y
 
-# Install dependencies
+# Install curl
 
-sudo apt install curl
+if dpkg -l | grep -q "curl"; then
+    echo "curl is installed."
+else
+    sudo apt-get curl
+fi
 
 # Set hostname
 
@@ -99,7 +117,7 @@ neofetch
 echo ""' > fig_neo.sh
 
 echo ""
-echo "ENTER SHELL DISPLAY NAME"
+echo "ENTER SSH / SHELL SERVER DISPLAY NAME"
 read -p 'Server Name:  ' neoname
 
 sudo sed -i "s/name1/$neoname/g" fig_neo.sh
@@ -213,12 +231,12 @@ while true; do
 
         ;;
         [Nn]* )
-            echo ""
             cat << EOF
+
                Please reboot the system as soon as possible.
-            ===================================================   
-                           INSTALLATION COMPLETE                
-            ===================================================               
+            ===================================================
+                           INSTALLATION COMPLETE               
+            ===================================================
 
 EOF
             exit 0
@@ -226,9 +244,6 @@ EOF
         * )
             echo ""
             echo "Select either Y or N";;
-    esac
-done
-exit 0
     esac
 done
 exit 0
