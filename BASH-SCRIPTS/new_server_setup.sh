@@ -28,15 +28,11 @@ Copyright 2025-$(date +'%Y'), Jonathan Syposs.
 
 EOF
 
-RED='\033[0;31m'
-NC='\033[0m' # No Color
-
-
 # Check if script has root privileges
 
 if [[ $(whoami) != "root" ]]; then
     echo ""
-    echo "${RED}ERROR: This script must be run as 'root' or with 'sudo' to function.${NC}"
+    echo "ERROR: This script must be run as 'root' or with 'sudo' to function."
     exit 1
 fi
 
@@ -44,7 +40,7 @@ fi
 
 if ! [[ $(stat -c "%A" $0) =~ "rw" ]]; then
    echo ""
-   echo "${RED}ERROR: This script requires read / write privileges to function.${NC}"
+   echo "ERROR: This script requires read / write privileges to function."
    exit 1
 fi
 
