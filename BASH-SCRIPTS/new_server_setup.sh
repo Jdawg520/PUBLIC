@@ -52,6 +52,10 @@ fi
 
 sudo apt update && sudo apt upgrade -y
 
+# Install dependencies
+
+sudo apt install curl
+
 # Set hostname
 
 while true; do
@@ -194,6 +198,10 @@ read -p 'PUBLIC SSH KEY:  ' sshkey
 sudo sh -c "echo '$sshkey' > .ssh/authorized_keys"
 
 sudo systemctl restart sshd
+
+# Copy bashrc file
+
+sudo curl https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output ~/.bashrc
 
 # SYSTEM REBOOT
 
