@@ -32,46 +32,21 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 
-# WERE ROOT AND EXECUTABLE PRIVLEDGES ASSIGNED?
+# Check if script has root privileges
 
-while true; do
+if [[ $(whoami) != "root" ]]; then
     echo ""
-    echo "!!!! THIS SCRIPT REQUIRES THAT READ/WRITE PRIVILEGES ARE ASSIGNED, AND THAT IT IS EXECUTED AS A ROOT USER !!!!"
-    echo ""
-    read -p "Was the script executed with root/read/write privileges? [Y=yes, N=no]" yesno
-    case $yesno in
-        [Yy]* )
-            break
-
-        ;;
-        [Nn]* )
-            exit
-
-        ;;
-        * )
-            echo ""
-            echo "Select either Y or N";;
-    esac
-done
-
-if ! [ "$EUID" -eq 0 ]; then
-    echo ""
-    echo ""
-    echo -e "${RED}WARNING: This script is not running as the root user!"
-    echo -e "This script requires root user privileges in order to function properly.${NC}"
-    read -p "Do you still want to continue? (y/n): " choice
-
-    # Check the user's choice
-    case "$choice" in
-        [Yy]|[Yy][Ee][Ss])
-            echo -e "Continuing...."
-            ;;
-        *)
-            exit 1
-            ;;
-    esac
+    echo "${RED}ERROR: This script must be run as 'root' or with 'sudo' to function.${NC}"
+    exit 1
 fi
 
+# Check if script has read / write privileges
+
+if ! [[ $(stat -c "%A" $0) =~ "rw" ]]; then
+   echo ""
+   echo "${RED}ERROR: This script requires read / write privileges to function.${NC}"
+   exit 1
+fi
 
 # Update repositories
 
@@ -234,7 +209,9 @@ while true; do
 
         ;;
         [Nn]* )
-            break
+            echo ""
+            echo "Please reboot the system as soon as possible."
+            exit 0
 
         ;;
         * )
@@ -242,4 +219,4 @@ while true; do
             echo "Select either Y or N";;
     esac
 done
-exit
+exit 0
