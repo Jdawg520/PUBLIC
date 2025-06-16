@@ -214,13 +214,21 @@ while true; do
         ;;
         [Nn]* )
             echo ""
-            echo "Please reboot the system as soon as possible."
-            exit 0
+            cat << EOF
+               Please reboot the system as soon as possible.
+            ===================================================   
+                           INSTALLATION COMPLETE                
+            ===================================================               
 
+EOF
+            exit 0
         ;;
         * )
             echo ""
             echo "Select either Y or N";;
+    esac
+done
+exit 0
     esac
 done
 exit 0
