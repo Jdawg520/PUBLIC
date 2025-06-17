@@ -225,7 +225,9 @@ sudo systemctl restart sshd
 
 # Copy bashrc file
 
-sudo curl https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output ~/.bashrc
+echo ""
+echo "Copying bashrc..."
+sudo curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output ~/.bashrc
 
 # SYSTEM REBOOT
 
