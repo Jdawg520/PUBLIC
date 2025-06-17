@@ -64,10 +64,10 @@ sudo apt update && sudo apt upgrade -y
 
 # Install curl
 
-if dpkg -l | grep -q "curl"; then
+if dpkg -l | grep -q -w "curl"; then
     echo "curl is installed."
 else
-    sudo apt-get curl
+    sudo apt-get install curl -y
 fi
 
 # Set hostname
