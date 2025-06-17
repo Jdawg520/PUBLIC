@@ -60,14 +60,18 @@ fi
 
 # Update repositories
 
-sudo apt update && sudo apt upgrade -y
+echo "Updating repositories and packages..."
+sudo apt -qq update && sudo apt-get -qq upgrade -y
+
+echo ""
+echo "Installing dependencies..."
 
 # Install curl
 
 if dpkg -l | grep -q -w "curl"; then
     echo "curl is installed."
 else
-    sudo apt-get install curl -y
+    sudo apt-get -qq install curl -y
 fi
 
 # Set hostname
@@ -98,7 +102,9 @@ done
 
 # Install Neofetch and Figurine
 
-sudo apt install -y neofetch
+echo "Installing terminal programs..."
+
+sudo apt-get -qq install -y neofetch
 sudo mkdir tmp
 cd tmp
 sudo wget https://github.com/arsham/figurine/releases/download/v1.3.0/figurine_linux_amd64_v1.3.0.tar.gz
@@ -125,8 +131,10 @@ sudo mv fig_neo.sh /etc/profile.d/fig_neo.sh
 
 # Install Postfix
 
-sudo apt install -y libsasl2-modules mailutils
-sudo apt install -y postfix postfix-pcre
+echo ""
+echo "Installing mail utilities..."
+sudo apt-get -qq install -y libsasl2-modules mailutils
+sudo apt-get -qq install -y postfix postfix-pcre
 
 # Input for SMTP account
 
@@ -175,7 +183,9 @@ echo "This is a test message from a new Linux server installation" | mail -s "Te
 
 # setup unattended Upgrades
 
-sudo apt install unattended-upgrades -y
+echo ""
+echo "Setting up unattended-upgrades..."
+sudo apt-get -qq install unattended-upgrades -y
 sudo dpkg-reconfigure --priority=low unattended-upgrades
 
 # Change unattended-upgrades config File
@@ -233,7 +243,7 @@ while true; do
         [Nn]* )
             cat << EOF
 
-               Please reboot the system as soon as possible.
+               Please reboot the system as soon as possible!
             ===================================================
                            INSTALLATION COMPLETE               
             ===================================================
