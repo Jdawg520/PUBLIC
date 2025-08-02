@@ -228,7 +228,14 @@ sudo systemctl restart sshd
 echo ""
 echo "Copying bashrc..."
 sudo curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output ~/.bashrc
-curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output ~/.bashrc
+sudo curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output /etc/skel/.bashrc
+
+echo ""
+echo "Enter username"
+read -p 'username:  ' username
+sudo curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output /home/$username/.bashrc
+
+
 
 # SYSTEM REBOOT
 
