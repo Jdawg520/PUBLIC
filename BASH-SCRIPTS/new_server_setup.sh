@@ -61,7 +61,7 @@ fi
 # Update repositories
 
 echo "Updating repositories and packages..."
-apt -qq update && sudo apt-get -qq upgrade -y
+apt -qq update && apt-get -qq upgrade -y
 
 echo ""
 echo "Installing dependencies..."
