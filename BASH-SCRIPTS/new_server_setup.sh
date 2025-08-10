@@ -206,6 +206,13 @@ sudo unattended-upgrades -d
 
 # setup UFW
 
+apt-get install ufw -y
+ufw default deny incoming
+ufw default allow outgoing
+ufw allow ssh
+ufw allow http
+ufw allow https
+ufw enable
 
 # setup SSH
 
