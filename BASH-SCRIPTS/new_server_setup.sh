@@ -61,7 +61,7 @@ fi
 # Update repositories
 
 echo "Updating repositories and packages..."
-sudo apt -qq update && sudo apt-get -qq upgrade -y
+apt -qq update && sudo apt-get -qq upgrade -y
 
 echo ""
 echo "Installing dependencies..."
@@ -71,7 +71,7 @@ echo "Installing dependencies..."
 if dpkg -l | grep -q -w "curl"; then
     echo "curl is installed."
 else
-    sudo apt-get -qq install curl -y
+    apt-get -qq install curl -y
 fi
 
 # Set hostname
@@ -83,7 +83,7 @@ while true; do
         [Yy]* )
             echo ""
             read -p 'new hostname:  ' hostname
-            sudo hostnamectl set-hostname $hostname
+            hostnamectl set-hostname $hostname
             echo "NEW HOSTNAME SET!!!!"
             echo ""
             echo ""
@@ -104,16 +104,16 @@ done
 
 echo "Installing terminal programs..."
 
-sudo apt-get -qq install -y neofetch
-sudo mkdir tmp
+apt-get -qq install -y neofetch
+mkdir tmp
 cd tmp
-sudo wget https://github.com/arsham/figurine/releases/download/v1.3.0/figurine_linux_amd64_v1.3.0.tar.gz
-sudo tar xvf figurine_linux_amd64_v1.3.0.tar.gz
-sudo mv deploy/figurine /usr/local/bin/
+wget https://github.com/arsham/figurine/releases/download/v1.3.0/figurine_linux_amd64_v1.3.0.tar.gz
+tar xvf figurine_linux_amd64_v1.3.0.tar.gz
+mv deploy/figurine /usr/local/bin/
 cd ..
-sudo rm -r tmp
+rm -r tmp
 
-sudo echo '#!/bin/bash
+echo '#!/bin/bash
 
 echo ""
 /usr/local/bin/figurine -f "3d.flf" name1
@@ -126,15 +126,15 @@ echo ""
 echo "ENTER SSH / SHELL SERVER DISPLAY NAME"
 read -p 'Server Name:  ' neoname
 
-sudo sed -i "s/name1/$neoname/g" fig_neo.sh
-sudo mv fig_neo.sh /etc/profile.d/fig_neo.sh
+sed -i "s/name1/$neoname/g" fig_neo.sh
+mv fig_neo.sh /etc/profile.d/fig_neo.sh
 
 # Install Postfix
 
 echo ""
 echo "Installing mail utilities..."
-sudo apt-get -qq install -y libsasl2-modules mailutils
-sudo apt-get -qq install -y postfix postfix-pcre
+apt-get -qq install -y libsasl2-modules mailutils
+apt-get -qq install -y postfix postfix-pcre
 
 # Input for SMTP account
 
@@ -142,14 +142,14 @@ echo ""
 echo "Enter SMTP Server Password..."
 read -sp 'Password:  ' PWORD
 
-sudo sh -c "echo 'smtp.gmail.com cyoppsalerts@gmail.com:$PWORD' > /etc/postfix/sasl_passwd"
+sh -c "echo 'smtp.gmail.com cyoppsalerts@gmail.com:$PWORD' > /etc/postfix/sasl_passwd"
 
-sudo postmap hash:/etc/postfix/sasl_passwd
-sudo chmod 600 /etc/postfix/sasl_passwd
+postmap hash:/etc/postfix/sasl_passwd
+chmod 600 /etc/postfix/sasl_passwd
 
-sudo sh -c "sed -i 's/relayhost/#relayhost/g' /etc/postfix/main.cf" 
+sh -c "sed -i 's/relayhost/#relayhost/g' /etc/postfix/main.cf" 
 
-sudo echo "# google mail configuration
+echo "# google mail configuration
 
 relayhost = smtp.gmail.com:587
 smtp_use_tls = yes
@@ -165,12 +165,12 @@ echo ""
 echo "Enter Email Display Name..."
 read -p 'Server Name:  ' servername
 
-sudo echo "/^From:.*/ REPLACE From: $servername-Alert <pve1-alert@something.com>" > /etc/postfix/smtp_header_checks
+echo "/^From:.*/ REPLACE From: $servername-Alert <pve1-alert@something.com>" > /etc/postfix/smtp_header_checks
 
-sudo postmap hash:/etc/postfix/smtp_header_checks
+postmap hash:/etc/postfix/smtp_header_checks
 echo ""
 
-sudo postfix reload
+postfix reload
 
 # send test email
 
@@ -185,12 +185,12 @@ echo "This is a test message from a new Linux server installation" | mail -s "Te
 
 echo ""
 echo "Setting up unattended-upgrades..."
-sudo apt-get -qq install unattended-upgrades -y
-sudo dpkg-reconfigure --priority=low unattended-upgrades
+apt-get -qq install unattended-upgrades -y
+dpkg-reconfigure --priority=low unattended-upgrades
 
 # Change unattended-upgrades config File
 
-sudo echo 'Unattended-Upgrade::Mail "email";
+echo 'Unattended-Upgrade::Mail "email";
 Unattended-Upgrade::MailReport "on-change";
 Unattended-Upgrade::Automatic-Reboot "true";
 ' > /etc/apt/apt.conf.d/51my-unattended-upgrades
@@ -199,10 +199,10 @@ echo ""
 echo "Enter Admin email address for notifications..."
 read -p 'Admin email address:  ' admin
 
-sudo sed -i "s/email/$admin/g" /etc/apt/apt.conf.d/51my-unattended-upgrades
+sed -i "s/email/$admin/g" /etc/apt/apt.conf.d/51my-unattended-upgrades
 
 
-sudo unattended-upgrades -d
+unattended-upgrades -d
 
 # setup UFW
 
@@ -216,31 +216,31 @@ ufw enable
 
 # setup SSH
 
-sudo sh -c "echo 'PubkeyAuthentication yes
+sh -c "echo 'PubkeyAuthentication yes
 AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2
 PasswordAuthentication no
 PermitRootLogin no' > /etc/ssh/sshd_config.d/my_config.conf"
 
-sudo mkdir .ssh
+mkdir .ssh
 
 echo ""
 echo "Enter Public SSH Key..."
 read -p 'PUBLIC SSH KEY:  ' sshkey
-sudo sh -c "echo '$sshkey' > .ssh/authorized_keys"
+sh -c "echo '$sshkey' > .ssh/authorized_keys"
 
-sudo systemctl restart sshd
+systemctl restart sshd
 
 # Copy bashrc file
 
 echo ""
 echo "Copying bashrc..."
-sudo curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output ~/.bashrc
-sudo curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output /etc/skel/.bashrc
+curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output ~/.bashrc
+curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output /etc/skel/.bashrc
 
 echo ""
 echo "Enter username"
 read -p 'username:  ' username
-sudo curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output /home/$username/.bashrc
+curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output /home/$username/.bashrc
 
 
 
@@ -253,7 +253,7 @@ while true; do
     read -p "Reboot Now? [Y=yes, N=no]" yesno2
     case $yesno2 in
         [Yy]* )
-            sudo reboot now            
+            reboot now            
             break
 
         ;;
