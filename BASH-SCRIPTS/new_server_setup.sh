@@ -242,7 +242,7 @@ curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-S
 curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output /etc/skel/.bashrc
 
 echo ""
-echo "Enter username"
+echo "Enter username for bashrc file home directory copy"
 read -p 'username:  ' username
 curl -q https://raw.githubusercontent.com/Jdawg520/PUBLIC/refs/heads/main/BASH-SCRIPTS/files/bashrc --output /home/$username/.bashrc
 
