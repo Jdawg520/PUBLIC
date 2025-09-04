@@ -129,6 +129,10 @@ read -p 'Server Name:  ' neoname
 sed -i "s/name1/$neoname/g" fig_neo.sh
 mv fig_neo.sh /etc/profile.d/fig_neo.sh
 
+# Set Timezone
+
+timedatectl set-timezone America/Phoenix
+
 # Install Postfix
 
 echo ""
